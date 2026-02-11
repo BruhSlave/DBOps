@@ -49,3 +49,14 @@ jobs:
           FLYWAY_USER: testuser
           FLYWAY_PASSWORD: testpassword
         run: flyway migrate -locations=filesystem:sql/migrations
+
+      - name: Install psql
+        run: |
+          sudo apt update
+          sudo apt install postgresql-client
+
+      - name: Select query from flyway_schema_history
+        end:
+          PGPASSWORD: testpassword
+        run: |
+          psql -h localhost -U testuser -d testdb -c "SELECT * FROM flyway_schema_history;"
