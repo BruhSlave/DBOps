@@ -56,7 +56,7 @@ jobs:
           sudo apt install postgresql-client
 
       - name: Select query from flyway_schema_history
-        end:
+        env:
           PGPASSWORD: testpassword
         run: |
           psql -h localhost -U testuser -d testdb -c "SELECT * FROM flyway_schema_history;"
